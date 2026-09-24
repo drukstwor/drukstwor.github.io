@@ -209,13 +209,20 @@ def remove_product() -> None:
 
 
 def main() -> None:
-    action = sys.argv[1].lower() if len(sys.argv) > 1 else ask("Wybierz działanie (dodaj/usun): ").lower()
-    if action in {"dodaj", "add"}:
-        add_product()
-    elif action in {"usun", "usuń", "remove", "delete"}:
-        remove_product()
-    else:
-        raise SystemExit("Użyj: python add_product.py dodaj albo python add_product.py usun")
+    interactive = len(sys.argv) == 1
+    try:
+        action = sys.argv[1].lower() if not interactive else ask("Wybierz działanie (dodaj/usun): ").lower()
+        if action in {"dodaj", "add"}:
+            add_product()
+        elif action in {"usun", "usuń", "remove", "delete"}:
+            remove_product()
+        else:
+            raise SystemExit("Użyj: dodaj albo usun.")
+    except (SystemExit, OSError, ValueError) as error:
+        print(f"\nNie wykonano operacji: {error}")
+    finally:
+        if interactive:
+            input("\nNaciśnij Enter, aby zamknąć okno...")
 
 
 if __name__ == "__main__":
