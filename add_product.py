@@ -155,11 +155,18 @@ def add_product() -> None:
 
 
 def list_manual_products(content: str) -> list[tuple[str, str]]:
-    return re.findall(
-        r'<article class="product-card manual-product-card"[^>]*data-id="([^"]+)"'
-        r'[^>]*data-name="([^"]*)"',
+    cards = re.findall(
+        r'<article\b[^>]*class="[^"]*\bmanual-product-card\b[^"]*"[^>]*>.*?</article>',
         content,
+        re.DOTALL,
     )
+    result = []
+    for card in cards:
+        product_id = re.search(r'\bdata-id="([^"]+)"', card)
+        name = re.search(r'\bdata-name="([^"]*)"', card)
+        if product_id and name:
+            result.append((product_id.group(1), html.unescape(name.group(1))))
+    return result
 
 
 def remove_product() -> None:
@@ -176,9 +183,14 @@ def remove_product() -> None:
         raise SystemExit("Nie znaleziono produktu o takim ID.")
 
     pattern = re.compile(
-        rf'\s*<article class="product-card manual-product-card"[^>]*data-id="{re.escape(selected)}".*?</article>\s*',
+        rf'\s*<article\b[^>]*class="[^"]*\bmanual-product-card\b[^"]*"[^>]*data-id="{re.escape(selected)}"[^>]*>.*?</article>\s*',
         re.DOTALL,
     )
+    if not pattern.search(content):
+        pattern = re.compile(
+            rf'\s*<article\b(?=[^>]*\bmanual-product-card\b)(?=[^>]*\bdata-id="{re.escape(selected)}")[^>]*>.*?</article>\s*',
+            re.DOTALL,
+        )
     match = pattern.search(content)
     if not match:
         raise SystemExit("Nie udało się odnaleźć karty produktu w index.html.")
