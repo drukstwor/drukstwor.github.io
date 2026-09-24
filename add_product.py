@@ -238,6 +238,11 @@ def remove_product() -> None:
 
 
 def main() -> None:
+    if len(sys.argv) == 1:
+        from product_manager_gui import ProductManager
+
+        ProductManager().mainloop()
+        return
     interactive = len(sys.argv) == 1
     try:
         action = sys.argv[1].lower() if not interactive else ask("Wybierz działanie (dodaj/usun): ").lower()
