@@ -131,10 +131,9 @@ if (contactForm && formStatus) {
     const name = (formData.get("name") || "").toString().trim();
     const subject = (formData.get("subject") || "").toString().trim();
     const email = (formData.get("email") || "").toString().trim();
-    const product = (formData.get("product") || "").toString().trim();
     const message = (formData.get("message") || "").toString().trim();
 
-    const mailTo = `mailto:polopfir@gmail.com?subject=${encodeURIComponent(subject || "Zapytanie z DRUKSTWÓR")}&body=${encodeURIComponent(`Imię i nazwisko: ${name}\nEmail: ${email}\nProdukt / idea: ${product || "brak"}\n\nWiadomość:\n${message}`)}`;
+    const mailTo = `mailto:polopfir@gmail.com?subject=${encodeURIComponent(subject || "Zapytanie z DRUKSTWÓR")}&body=${encodeURIComponent(`Imię i nazwisko: ${name}\nEmail: ${email}\n\nWiadomość:\n${message}`)}`;
 
     formStatus.textContent = "Przekierowujemy do klienta mailowego…";
     window.location.href = mailTo;
