@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="DrukStwór.pl — wydruki 3D, halloweenowe dekoracje i gadżety z charakterem.">
+  <title>DrukStwór.pl — Wydruki 3D z pasją</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="DrukStwór.pl strony głównej">
+      <img src="logo-drukstwór.png" alt="Logo DrukStwór.pl" class="brand-logo">
+    </a>
+
+    <nav class="main-nav" aria-label="Nawigacja główna">
+      <a href="#halloween">Halloween</a>
+      <a href="#gadgets">Gadżety</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+
+    <button class="menu-toggle" aria-label="Otwórz menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-label="Sekcja główna">
+      <div class="hero-content">
+        <h1 class="hero-title">HALLOWEEN</h1>
+        <h2 class="hero-subtitle">W 3D 🎃</h2>
+        <p class="hero-copy">WYJĄTKOWE DEKORACJE I GADŻETY<br>DRUKOWANE W 3D</p>
+        <a class="button hero-cta" href="#halloween">ODKRYJ KOLEKCJĘ <span>→</span></a>
+        <div class="hero-features" aria-label="Najważniejsze cechy">
+          <div><span class="feature-icon" aria-hidden="true">✦</span><span>Unikalne projekty</span></div>
+          <div><span class="feature-icon" aria-hidden="true">↗</span><span>Szybka wysyłka</span></div>
+          <div><span class="feature-icon" aria-hidden="true">♡</span><span>Dla pasjonatów</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="halloween">
+      <div class="section-header">
+        <div>
+          <p class="eyebrow">Halloween</p>
+          <h2 class="section-title">Halloween <span>w 3D</span></h2>
+        </div>
+        <p class="section-subtitle">Dekoracje, figurki i gadżety drukowane z pasją.</p>
+      </div>
+      <div class="product-grid" id="halloween-grid">
+                <article class="product-card manual-product-card" data-manual="true" data-id="manual-1"
+          data-name="Kutas" data-category="Halloween" data-label=""
+          data-price="15,99" data-description="dla pedała"
+          data-image="images/images.webp" tabindex="0">
+          <div class="product-image">
+            
+            <img src="images/images.webp" alt="Kutas" class="product-photo">
+          </div>
+          <div class="product-content">
+            <div class="product-head">
+              <h3 class="product-name">Kutas</h3>
+              <span class="product-price">15,99 zł</span>
+            </div>
+            <p class="product-description">dla pedała</p>
+            <div class="product-footer">
+              <span class="product-category">Halloween</span>
+              <a class="buy-link" href="https://allegro.pl" target="_blank" rel="noopener noreferrer">KUP NA ALLEGRO</a>
+            </div>
+          </div>
+        </article>
+        <!-- PRODUCTS_HALLOWEEN_END -->
+      </div>
+    </section>
+
+    <section class="section" id="gadgets">
+      <div class="section-header">
+        <div>
+          <p class="eyebrow">Gadżety</p>
+          <h2 class="section-title">Gadżety <span>3D</span></h2>
+        </div>
+        <p class="section-subtitle">Słodko-mroczne dodatki i małe dzieła z druku 3D, które sprawiają, że wnętrze ma charakter.</p>
+      </div>
+      <div class="product-grid" id="gadgets-grid">
+        <!-- PRODUCTS_GADGETS_END -->
+      </div>
+    </section>
+
+    <section class="section contact-section" id="kontakt">
+      <div class="section-header">
+        <div>
+          <p class="eyebrow">Kontakt</p>
+          <h2 class="section-title">Napisz do <span>nas</span></h2>
+        </div>
+        <p class="section-subtitle">Masz pytanie o produkt, kolor, czas realizacji lub chcesz złożyć własny pomysł? Odpowiemy najszybciej, jak to możliwe.</p>
+      </div>
+
+      <div class="contact-panel">
+        <form class="contact-form" id="contactForm">
+          <div class="field-row">
+            <label>
+              <span>Imię i nazwisko</span>
+              <input type="text" name="name" placeholder="Twoje imię i nazwisko" required>
+            </label>
+            <label>
+              <span>Email</span>
+              <input type="email" name="email" placeholder="twoj@email.pl" required>
+            </label>
+          </div>
+
+          <div class="field-row">
+            <label>
+              <span>Temat</span>
+              <input type="text" name="subject" placeholder="np. Zamówienie na figurkę" required>
+            </label>
+            <label>
+              <span>Produkt / idea</span>
+              <select name="product">
+                <option value="">Wybierz opcję</option>
+                <option value="fantasy">Fantasy</option>
+                <option value="zwierzeta">Zwierzęta</option>
+                <option value="dekoracje">Dekoracje</option>
+                <option value="retro">Retro</option>
+                <option value="indywidualne">Zamówienie indywidualne</option>
+              </select>
+            </label>
+          </div>
+
+          <label>
+            <span>Wiadomość</span>
+            <textarea name="message" rows="6" placeholder="Opisz, czego szukasz. Możesz podać rozmiar, kolor, temat lub pomysł na postać." required></textarea>
+          </label>
+
+          <div class="form-actions">
+            <button type="submit" class="button">Wyślij wiadomość</button>
+            <p class="form-status" id="form-status" aria-live="polite"></p>
+          </div>
+        </form>
+
+        <aside class="contact-aside">
+          <div class="mini-card">
+            <span class="mini-label">Email</span>
+            <strong>polopfir@gmail.com</strong>
+          </div>
+          <div class="mini-card">
+            <span class="mini-label">TikTok</span>
+            <strong>DrukStwór</strong>
+          </div>
+          <div class="mini-card accent">
+            <span class="mini-label">Oferta</span>
+            <strong>Druk 3D z charakterem</strong>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-brand">
+      <img src="logo-drukstwór.png" alt="Logo DrukStwór.pl" class="footer-logo">
+    </div>
+
+    <p class="footer-copy">DrukStwór.pl<br>Wydruki 3D z pasją</p>
+
+    <div class="footer-links">
+      <a href="#halloween">Halloween</a>
+      <a href="#gadgets">Gadżety</a>
+      <a href="#kontakt">Kontakt</a>
+      <a href="https://allegro.pl" target="_blank" rel="noopener noreferrer">Allegro</a>
+    </div>
+
+    <div class="footer-meta">© 2024 DrukStwór.pl</div>
+  </footer>
+
+  <dialog class="product-modal" id="product-modal">
+    <div class="modal-layout">
+      <div class="modal-visual" id="modal-visual"></div>
+
+      <div class="modal-content">
+        <button class="modal-close" type="button" aria-label="Zamknij">×</button>
+        <p class="modal-category" id="modal-category"></p>
+        <h3 class="modal-name" id="modal-name"></h3>
+        <p class="modal-description" id="modal-description"></p>
+
+        <div class="modal-specs">
+          <div class="modal-spec">
+            <b>Materiał</b>
+            <span id="modal-material"></span>
+          </div>
+          <div class="modal-spec">
+            <b>Wysokość</b>
+            <span id="modal-size"></span>
+          </div>
+          <div class="modal-spec">
+            <b>Czas druku</b>
+            <span id="modal-time"></span>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <span class="modal-price" id="modal-price"></span>
+          <a class="button" id="modal-link" href="https://allegro.pl" target="_blank" rel="noopener noreferrer">KUP NA ALLEGRO</a>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
