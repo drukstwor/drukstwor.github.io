@@ -85,10 +85,16 @@ def card_markup(data: dict[str, str]) -> str:
 """
 
 
-def run_git(*args: str, check: bool = False) -> subprocess.CompletedProcess[str]:
+def run_git(
+    *args: str, check: bool = False, credential_manager: bool = False
+) -> subprocess.CompletedProcess[str]:
     git = find_git()
+    command = [git]
+    if credential_manager:
+        command.extend(["-c", "credential.helper=manager"])
+    command.extend(args)
     return subprocess.run(
-        [git, *args],
+        command,
         cwd=ROOT,
         text=True,
         capture_output=True,
@@ -123,7 +129,7 @@ def sync_repository(action: str) -> None:
         print(f"\nNie udało się utworzyć commita: {committed.stderr.strip()}")
         return
 
-    pushed = run_git("push")
+    pushed = run_git("push", credential_manager=True)
     if pushed.returncode == 0:
         print("Zmiany zostały zapisane, zacommitowane i wysłane do GitHub.")
     else:
