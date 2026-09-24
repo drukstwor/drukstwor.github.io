@@ -68,8 +68,11 @@ def card_markup(data: dict[str, str]) -> str:
 
 
 def run_git(*args: str, check: bool = False) -> subprocess.CompletedProcess[str]:
+    git = shutil.which("git")
+    if not git:
+        raise FileNotFoundError("Nie znaleziono programu Git w PATH.")
     return subprocess.run(
-        ["git", *args],
+        [git, *args],
         cwd=ROOT,
         text=True,
         capture_output=True,
@@ -78,7 +81,11 @@ def run_git(*args: str, check: bool = False) -> subprocess.CompletedProcess[str]
 
 
 def sync_repository(action: str) -> None:
-    check = run_git("rev-parse", "--is-inside-work-tree")
+    try:
+        check = run_git("rev-parse", "--is-inside-work-tree")
+    except FileNotFoundError as error:
+        print(f"\nProdukt zapisano lokalnie, ale nie można wykonać synchronizacji: {error}")
+        return
     if check.returncode != 0:
         print("\nZmiany zapisano lokalnie. Ten folder nie jest klonem GitHub repozytorium.")
         print("Aby włączać automatyczny push, uruchom skrypt w sklonowanym repozytorium.")
