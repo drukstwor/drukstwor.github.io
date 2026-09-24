@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Figurki 3D drukowane na zamówienie — kolekcjonerskie modele, fantasy i dekoracje do domu.">
+  <title>DRUKSTWÓR — Figurki 3D z charakterem</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="announcement"><span>✦</span> Nowa kolekcja „Mity północy” już dostępna <a href="#catalog">Odkryj modele <span>→</span></a></div>
+
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="DRUKSTWÓR — strona główna">
+      <span class="brand-frame">
+        <img src="logo-drukstwór.png" alt="Logo DRUKSTWÓR" class="brand-logo">
+      </span>
+    </a>
+    <nav class="main-nav" aria-label="Główna nawigacja">
+      <a href="#catalog">Katalog</a>
+      <a href="#process">Jak powstają</a>
+      <a href="#about">O nas</a>
+      <a href="#faq">FAQ</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <a class="header-cta" href="#catalog">Zobacz figurki <span>↗</span></a>
+    <button class="menu-toggle" aria-label="Otwórz menu" aria-expanded="false"><span></span><span></span></button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-line"></span> Drukowane z wyobraźni</p>
+        <h1>Stwory z druku.<br><em>Duży charakter.</em></h1>
+        <p class="hero-lead">Kolekcjonerskie figurki 3D, które dodają przestrzeni osobowości. Projektujemy, drukujemy i dopieszczamy każdy detal.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#catalog">Przeglądaj kolekcję <span>↗</span></a>
+          <a class="text-link" href="#process">Poznaj nasz proces <span>↓</span></a>
+        </div>
+        <div class="hero-meta">
+          <div><strong>240+</strong><span>unikalnych modeli</span></div>
+          <div><strong>4.9/5</strong><span>ocena kolekcjonerów</span></div>
+          <div><strong>100%</strong><span>drukowane w Polsce</span></div>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="art-glow"></div>
+        <div class="shape shape-back"></div>
+        <div class="shape shape-middle"></div>
+        <div class="figure figure-main"><span class="figure-eye"></span><span class="figure-eye right"></span><span class="figure-smile"></span></div>
+        <div class="figure figure-small"><span class="figure-eye"></span><span class="figure-eye right"></span></div>
+        <div class="moon"></div><div class="bat bat-one">✦</div><div class="bat bat-two">✦</div>
+        <img class="brand-hero-logo" src="logo-drukstwór.png" alt="Logo DRUKSTWÓR">
+        <div class="art-label art-label-top"><span>01</span> STWÓR MIESIĄCA</div>
+        <div class="art-label art-label-bottom">D-017 <span>◌</span> 12h druku</div>
+      </div>
+    </section>
+
+    <section class="ticker" aria-label="Nasze kolekcje">
+      <div class="ticker-track"><span>CHARAKTERNE STWORY</span><b>✦</b><span>DRUK 3D</span><b>✦</b><span>KOLEKCJA HALLOWEEN</span><b>✦</b><span>CHARAKTERNE STWORY</span><b>✦</b><span>DRUK 3D</span><b>✦</b><span>KOLEKCJA HALLOWEEN</span><b>✦</b></div>
+    </section>
+
+    <section class="catalog-section" id="catalog">
+      <div class="section-heading">
+        <div><p class="eyebrow"><span class="eyebrow-line"></span> Wybierz swoją</p><h2>Najpopularniejsze<br><em>figurki</em></h2></div>
+        <p class="section-intro">Każdy model drukujemy na zamówienie z wysokiej jakości filamentu. Kliknij produkt, aby zobaczyć szczegóły i przejść do oferty na Allegro.</p>
+      </div>
+      <div class="catalog-toolbar">
+        <div class="filter-tabs" role="tablist" aria-label="Kategorie produktów">
+          <button class="filter-tab active" data-filter="all" role="tab">Wszystkie <sup>12</sup></button>
+          <button class="filter-tab" data-filter="fantasy" role="tab">Fantasy <sup>4</sup></button>
+          <button class="filter-tab" data-filter="zwierzeta" role="tab">Zwierzęta <sup>3</sup></button>
+          <button class="filter-tab" data-filter="dekoracje" role="tab">Dekoracje <sup>3</sup></button>
+          <button class="filter-tab" data-filter="retro" role="tab">Retro <sup>2</sup></button>
+        </div>
+        <div class="catalog-tools">
+          <label class="search-box"><span>⌕</span><input id="search" type="search" placeholder="Szukaj figurek..." aria-label="Szukaj figurek"></label>
+          <label class="sort-box"><span>Sortuj:</span><select id="sort"><option value="featured">Polecane</option><option value="price-low">Cena: rosnąco</option><option value="price-high">Cena: malejąco</option><option value="name">Nazwa A–Z</option></select></label>
+        </div>
+      </div>
+      <div class="product-grid" id="product-grid"></div>
+      <p class="empty-state" id="empty-state">Nie znaleziono figurek. Spróbuj innej frazy.</p>
+      <div class="catalog-footer"><span>Pokazano <strong id="result-count">12</strong> figurek</span><a class="button button-outline" href="https://allegro.pl" target="_blank" rel="noopener">Zobacz wszystkie na Allegro <span>↗</span></a></div>
+    </section>
+
+    <section class="process-section" id="process">
+      <div class="process-art"><div class="process-circle"></div><div class="process-number">02</div><div class="mini-figure"></div><span class="process-caption">od pomysłu<br>do formy</span></div>
+      <div class="process-copy"><p class="eyebrow"><span class="eyebrow-line"></span> Jak działamy</p><h2>Technologia<br><em>z ludzką ręką</em></h2><p>Wierzymy, że najlepsze przedmioty powstają na styku cyfrowego projektu i rzemieślniczej dbałości. Dlatego każda figurka przechodzi przez nasze ręce.</p><div class="steps"><div class="step"><span>01</span><div><h3>Projekt</h3><p>Wybieramy modele, które mają coś do powiedzenia.</p></div></div><div class="step"><span>02</span><div><h3>Druk</h3><p>Precyzyjny druk FDM lub żywiczny w wybranym kolorze.</p></div></div><div class="step"><span>03</span><div><h3>Wykończenie</h3><p>Kontrola jakości, usunięcie podpór i pakowanie.</p></div></div></div></div>
+    </section>
+
+    <section class="about-section" id="about"><div class="about-inner"><p class="eyebrow"><span class="eyebrow-line"></span> Poznaj DRUKSTWORA</p><h2>Przedmioty z<br><em>osobowością.</em></h2><p>Nie tworzymy masowych gadżetów. Tworzymy małe przypomnienia o tym, co lubisz — od smoka na półce po kota, który zawsze patrzy w dobrą stronę.</p><a class="text-link light" href="#faq">Dowiedz się więcej <span>→</span></a></div><div class="about-stamp">MADE<br>WITH<br><strong>☾</strong><br>MAGIC</div></section>
+
+    <section class="faq-section" id="faq"><div class="section-heading"><div><p class="eyebrow"><span class="eyebrow-line"></span> Masz pytania?</p><h2>To, co warto<br><em>wiedzieć</em></h2></div><p class="section-intro">Nie znalazłeś odpowiedzi? Napisz do nas przez formularz kontaktowy na wybranej ofercie.</p></div><div class="faq-list"><details><summary>Z jakiego materiału drukujecie figurki?<span>+</span></summary><p>Najczęściej korzystamy z wysokiej jakości filamentu PLA — jest trwały, bezpieczny i dostępny w wielu kolorach. Przy małych, bardzo szczegółowych modelach używamy także żywicy.</p></details><details><summary>Czy mogę zamówić figurkę w innym kolorze?<span>+</span></summary><p>Tak. Jeśli interesuje Cię inny wariant kolorystyczny, napisz do nas przed zakupem przez wiadomość Allegro. Sprawdzimy dostępność i podamy termin realizacji.</p></details><details><summary>Ile trwa przygotowanie modelu?<span>+</span></summary><p>Standardowo przygotowanie i wysyłka zajmują 2–5 dni roboczych. Modele malowane lub wykonywane na indywidualne zamówienie mogą potrzebować więcej czasu.</p></details></div></section>
+
+    <section class="contact-section" id="kontakt">
+      <div class="section-heading contact-heading">
+        <div><p class="eyebrow"><span class="eyebrow-line"></span> Kontakt</p><h2>Napisz do nas<br><em>i zrealizuj swój pomysł</em></h2></div>
+        <p class="section-intro">Masz pytanie o model, chcesz zamówić wersję specjalną albo zapytać o dostępność? Uzupełnij formularz — odpowiemy wkrótce.</p>
+      </div>
+      <div class="contact-box">
+        <form class="contact-form" id="contactForm">
+          <div class="field-row">
+            <label>
+              <span>Imię i nazwisko</span>
+              <input type="text" name="name" placeholder="Twoje imię i nazwisko" required>
+            </label>
+            <label>
+              <span>Email</span>
+              <input type="email" name="email" placeholder="twoj@email.pl" required>
+            </label>
+          </div>
+          <div class="field-row">
+            <label>
+              <span>Temat</span>
+              <input type="text" name="subject" placeholder="np. Zamówienie na figurkę" required>
+            </label>
+            <label>
+              <span>Produkt / idea</span>
+              <select name="product">
+                <option value="">Wybierz opcję</option>
+                <option value="fantasy">Fantasy</option>
+                <option value="zwierzeta">Zwierzęta</option>
+                <option value="dekoracje">Dekoracje</option>
+                <option value="retro">Retro</option>
+                <option value="indywidualne">Zamówienie indywidualne</option>
+              </select>
+            </label>
+          </div>
+          <label>
+            <span>Wiadomość</span>
+            <textarea name="message" rows="6" placeholder="Opisz, czego szukasz. Możesz podać rozmiar, kolor, temat lub pomysł na postać." required></textarea>
+          </label>
+          <div class="form-actions">
+            <button type="submit" class="button button-primary">Wyślij wiadomość <span>→</span></button>
+            <p id="form-status" aria-live="polite"></p>
+          </div>
+        </form>
+        <aside class="contact-aside">
+          <div class="mini-card">
+            <span class="mini-label">Email</span>
+            <strong>biuro@drukstwór.pl</strong>
+          </div>
+          <div class="mini-card">
+            <span class="mini-label">Instagram</span>
+            <strong>@drukstwór</strong>
+          </div>
+          <div class="mini-card accent">
+            <span class="mini-label">Oferta</span>
+            <strong>Druk 3D z charakterem</strong>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><a class="brand" href="#"><img src="logo-drukstwór.png" alt="Logo DRUKSTWÓR" class="brand-logo brand-logo-footer"></a><p>Drukujemy stwory, które<br>chcesz mieć obok.</p><div class="footer-links"><a href="#catalog">Katalog</a><a href="#process">Jak powstają</a><a href="#faq">FAQ</a><a href="#kontakt">Kontakt</a><a href="https://allegro.pl" target="_blank" rel="noopener">Allegro ↗</a></div><small>© 2024 DRUKSTWÓR</small></footer>
+
+  <dialog class="product-modal" id="product-modal"><button class="modal-close" aria-label="Zamknij">×</button><div class="modal-visual" id="modal-visual"></div><div class="modal-content"><p class="eyebrow" id="modal-category"></p><h2 id="modal-name"></h2><p id="modal-description"></p><div class="modal-specs"><span><b>Materiał</b><small id="modal-material"></small></span><span><b>Wysokość</b><small id="modal-size"></small></span><span><b>Czas druku</b><small id="modal-time"></small></span></div><div class="modal-buy"><strong id="modal-price"></strong><a class="button button-primary" id="modal-link" href="https://allegro.pl" target="_blank" rel="noopener">Przejdź do Allegro <span>↗</span></a></div></div></dialog>
+  <script src="script.js"></script>
+</body>
+</html>
