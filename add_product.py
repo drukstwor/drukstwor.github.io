@@ -41,6 +41,24 @@ def valid_url(value: str) -> bool:
     return parsed.scheme in {"http", "https"} and bool(parsed.netloc)
 
 
+def find_git() -> str:
+    git = shutil.which("git")
+    if git:
+        return git
+
+    candidates = [
+        Path.home() / "AppData" / "Local" / "Programs" / "Git" / "cmd" / "git.exe",
+        Path.home() / "AppData" / "Local" / "github-copilot-git-2.53.0-4" / "cmd" / "git.exe",
+        Path("C:/Program Files/Git/cmd/git.exe"),
+        Path("C:/Program Files/Git/bin/git.exe"),
+        Path("C:/Program Files (x86)/Git/cmd/git.exe"),
+    ]
+    for candidate in candidates:
+        if candidate.is_file():
+            return str(candidate)
+    raise FileNotFoundError("Nie znaleziono programu Git. Zainstaluj Git lub dodaj go do PATH.")
+
+
 def card_markup(data: dict[str, str]) -> str:
     values = {key: html.escape(value, quote=True) for key, value in data.items()}
     badge = f'<span class="product-badge">{values["label"]}</span>' if values["label"] else ""
@@ -68,9 +86,7 @@ def card_markup(data: dict[str, str]) -> str:
 
 
 def run_git(*args: str, check: bool = False) -> subprocess.CompletedProcess[str]:
-    git = shutil.which("git")
-    if not git:
-        raise FileNotFoundError("Nie znaleziono programu Git w PATH.")
+    git = find_git()
     return subprocess.run(
         [git, *args],
         cwd=ROOT,
