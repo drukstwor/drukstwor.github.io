@@ -22,11 +22,14 @@ function categoryName(category) {
 }
 
 function cardTemplate(product) {
+  const image = product.image
+    ? `<img src="${product.image}" alt="${product.name}" class="product-photo">`
+    : '<div class="product-figure"></div>';
   return `
-    <article class="product-card" data-id="${product.id}" style="--card-bg:${product.bg}; --card-ink:${product.ink}; --card-accent:${product.accent};">
+    <article class="product-card" data-id="${product.id}" data-image="${product.image || ""}" style="--card-bg:${product.bg}; --card-ink:${product.ink}; --card-accent:${product.accent};">
       <div class="product-image">
         ${product.label ? `<span class="product-badge">${product.label}</span>` : ""}
-        <div class="product-figure"></div>
+        ${image}
       </div>
       <div class="product-content">
         <div class="product-head">
@@ -86,6 +89,7 @@ function openModal(id) {
     size: manualProduct.size || "—",
     time: manualProduct.time || "—",
     description: manualProduct.description,
+    image: manualProduct.image,
     bg: manualProduct.bg || "#2a1b12",
     ink: manualProduct.ink || "#ffffff",
     accent: manualProduct.accent || "#ff7900"
@@ -95,7 +99,9 @@ function openModal(id) {
   modalVisual.style.setProperty("--card-bg", productData.bg);
   modalVisual.style.setProperty("--card-ink", productData.ink);
   modalVisual.style.setProperty("--card-accent", productData.accent);
-  modalVisual.innerHTML = '<div class="product-figure"></div>';
+  modalVisual.innerHTML = productData.image
+    ? `<img src="${productData.image}" alt="${productData.name}" class="modal-product-photo">`
+    : '<div class="product-figure"></div>';
 
   const displayCategory = product ? categoryName(productData.category) : productData.category;
   document.querySelector("#modal-category").textContent = `${displayCategory} · ${productData.label || "Kolekcja DrukStwór"}`;
