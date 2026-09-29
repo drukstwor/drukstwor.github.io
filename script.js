@@ -117,7 +117,10 @@ if (menuToggle && nav) {
   });
 
   nav.querySelectorAll("a").forEach(link => {
-    link.addEventListener("click", () => nav.classList.remove("open"));
+    link.addEventListener("click", () => {
+      nav.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+    });
   });
 }
 
