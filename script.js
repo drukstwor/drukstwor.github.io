@@ -124,30 +124,6 @@ if (menuToggle && nav) {
   });
 }
 
-const contactForm = document.querySelector("#contactForm");
-const formStatus = document.querySelector("#form-status");
-
-if (contactForm && formStatus) {
-  contactForm.addEventListener("submit", event => {
-    event.preventDefault();
-    const formData = new FormData(contactForm);
-    const name = (formData.get("name") || "").toString().trim();
-    const subject = (formData.get("subject") || "").toString().trim();
-    const email = (formData.get("email") || "").toString().trim();
-    const message = (formData.get("message") || "").toString().trim();
-
-    const mailTo = `mailto:polopfir@gmail.com?subject=${encodeURIComponent(subject || "Zapytanie z DRUKSTWÓR")}&body=${encodeURIComponent(`Imię i nazwisko: ${name}\nEmail: ${email}\n\nWiadomość:\n${message}`)}`;
-
-    formStatus.textContent = "Przekierowujemy do klienta mailowego…";
-    window.location.href = mailTo;
-    contactForm.reset();
-
-    setTimeout(() => {
-      formStatus.textContent = "Dziękujemy! Możesz też napisać bezpośrednio na polopfir@gmail.com";
-    }, 500);
-  });
-}
-
 if (modal) {
   modal.addEventListener("click", event => {
     if (event.target === modal) {
