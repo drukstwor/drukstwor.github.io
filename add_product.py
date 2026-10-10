@@ -41,6 +41,16 @@ def valid_url(value: str) -> bool:
     return parsed.scheme in {"http", "https"} and bool(parsed.netloc)
 
 
+def ask_yes_no(prompt: str) -> bool:
+    while True:
+        value = input(prompt).strip().lower()
+        if value in {"t", "tak"}:
+            return True
+        if value in {"n", "nie"}:
+            return False
+        print("Wpisz t (tak) albo n (nie).")
+
+
 def find_git() -> str:
     git = shutil.which("git")
     if git:
@@ -61,11 +71,18 @@ def find_git() -> str:
 
 def card_markup(data: dict[str, str]) -> str:
     values = {key: html.escape(value, quote=True) for key, value in data.items()}
+    values.setdefault("olx_link", "")
     badge = f'<span class="product-badge">{values["label"]}</span>' if values["label"] else ""
+    olx_link = (
+        f'<a class="buy-link" href="{values["olx_link"]}" target="_blank" '
+        'rel="noopener noreferrer">KUP NA OLX</a>'
+        if values["olx_link"]
+        else ""
+    )
     return f"""        <article class="product-card manual-product-card" data-manual="true" data-id="{values["id"]}"
           data-name="{values["name"]}" data-category="{values["category"]}" data-label="{values["label"]}"
           data-price="{values["price"]}" data-description="{values["description"]}"
-          data-image="{values["image"]}" data-link="{values["link"]}" tabindex="0">
+          data-image="{values["image"]}" data-link="{values["link"]}" data-olx-link="{values["olx_link"]}" tabindex="0">
           <div class="product-image">
             {badge}
             <img src="{values["image"]}" alt="{values["name"]}" class="product-photo">
@@ -78,7 +95,10 @@ def card_markup(data: dict[str, str]) -> str:
             <p class="product-description">{values["description"]}</p>
             <div class="product-footer">
               <span class="product-category">{values["category"]}</span>
-              <a class="buy-link" href="{values["link"]}" target="_blank" rel="noopener noreferrer">KUP NA ALLEGRO</a>
+              <div class="product-actions">
+                <a class="buy-link" href="{values["link"]}" target="_blank" rel="noopener noreferrer">KUP NA ALLEGRO</a>
+                {olx_link}
+              </div>
             </div>
           </div>
         </article>
@@ -149,6 +169,13 @@ def add_product() -> None:
     allegro_link = ask("Link do oferty Allegro: ")
     if not valid_url(allegro_link):
         raise SystemExit("Link musi zaczynać się od http:// albo https://.")
+    olx_link = (
+        ask("Link do oferty OLX: ")
+        if ask_yes_no("Dodać też link do OLX? (t/n): ")
+        else ""
+    )
+    if olx_link and not valid_url(olx_link):
+        raise SystemExit("Link OLX musi zaczynać się od http:// albo https://.")
     source_image = Path(ask("Ścieżka do zdjęcia produktu: ")).expanduser()
     if not source_image.is_file():
         raise SystemExit(f"Nie znaleziono pliku zdjęcia: {source_image}")
@@ -175,6 +202,7 @@ def add_product() -> None:
         "label": label,
         "image": f"images/{filename}",
         "link": allegro_link,
+        "olx_link": olx_link,
     }
     content = content.replace(marker, card_markup(data) + f"        {marker}", 1)
     HTML_FILE.write_text(content, encoding="utf-8")

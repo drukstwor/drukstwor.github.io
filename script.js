@@ -104,6 +104,15 @@ function openModal(id) {
   modalLink.setAttribute("target", "_blank");
   modalLink.setAttribute("rel", "noopener noreferrer");
 
+  const modalOlxLink = document.querySelector("#modal-olx-link");
+  if (modalOlxLink) {
+    const olxLink = manualProduct ? manualProduct.olxLink : product.olxLink;
+    modalOlxLink.hidden = !olxLink;
+    if (olxLink) {
+      modalOlxLink.href = olxLink;
+    }
+  }
+
   modal.showModal();
 }
 

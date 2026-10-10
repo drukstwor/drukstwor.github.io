@@ -464,10 +464,23 @@ body.header-scrolled .site-header {
 
 .product-footer {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 0.8rem;
   margin-top: 0.25rem;
+}
+
+.product-actions,
+.modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.product-actions {
+  justify-content: flex-end;
 }
 
 .buy-link {
@@ -724,6 +737,10 @@ body.header-scrolled .site-header {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+}
+
+.modal-actions [hidden] {
+  display: none;
 }
 
 .modal-price {
