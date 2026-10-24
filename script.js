@@ -1,19 +1,16 @@
 const products = [];
 
-const halloweenProducts = products.filter(product => ["fantasy", "retro"].includes(product.category));
-const gadgetProducts = products.filter(product => !halloweenProducts.includes(product));
 const sellLink = "https://allegro.pl";
-
-function categoryName(category) {
-  return { fantasy: "Fantasy", zwierzeta: "Zwierzęta", dekoracje: "Dekoracje", retro: "Retro" }[category];
-}
 
 function cardTemplate(product) {
   const image = product.image
     ? `<img src="${product.image}" alt="${product.name}" class="product-photo">`
     : '<div class="product-figure"></div>';
+  const olxLink = product.olxLink
+    ? `<a class="buy-link" href="${product.olxLink}" target="_blank" rel="noopener noreferrer">KUP NA OLX</a>`
+    : "";
   return `
-    <article class="product-card" data-id="${product.id}" data-image="${product.image || ""}" style="--card-bg:${product.bg}; --card-ink:${product.ink}; --card-accent:${product.accent};">
+    <article class="product-card" data-id="${product.id}" data-image="${product.image || ""}" style="--card-bg:${product.bg || "#eae6e1"}; --card-ink:${product.ink || "#ed7415"}; --card-accent:${product.accent || "#ed7415"};">
       <div class="product-image">
         ${product.label ? `<span class="product-badge">${product.label}</span>` : ""}
         ${image}
@@ -25,8 +22,11 @@ function cardTemplate(product) {
         </div>
         <p class="product-description">${product.description}</p>
         <div class="product-footer">
-          <span class="product-category">${categoryName(product.category)}</span>
-          <a class="buy-link" href="${sellLink}" target="_blank" rel="noopener noreferrer">KUP NA ALLEGRO</a>
+          <span class="product-category">Produkt 3D</span>
+          <div class="product-actions">
+            <a class="buy-link" href="${product.link || sellLink}" target="_blank" rel="noopener noreferrer">KUP NA ALLEGRO</a>
+            ${olxLink}
+          </div>
         </div>
       </div>
     </article>
@@ -34,19 +34,17 @@ function cardTemplate(product) {
 }
 
 function renderProducts() {
-  const halloweenGrid = document.querySelector("#halloween-grid");
-  const gadgetsGrid = document.querySelector("#gadgets-grid");
-  const manualHalloweenProducts = halloweenGrid ? halloweenGrid.querySelectorAll(".manual-product-card") : [];
-  const manualGadgetProducts = gadgetsGrid ? gadgetsGrid.querySelectorAll(".manual-product-card") : [];
+  const productGrid = document.querySelector("#products-grid");
+  const emptyState = document.querySelector("#products-empty");
+  const manualProducts = productGrid ? [...productGrid.querySelectorAll(".manual-product-card")] : [];
 
-  if (halloweenGrid) {
-    halloweenGrid.innerHTML = halloweenProducts.map(cardTemplate).join("");
-    manualHalloweenProducts.forEach(card => halloweenGrid.appendChild(card));
+  if (productGrid) {
+    productGrid.innerHTML = products.map(cardTemplate).join("");
+    manualProducts.forEach(card => productGrid.appendChild(card));
   }
 
-  if (gadgetsGrid) {
-    gadgetsGrid.innerHTML = gadgetProducts.map(cardTemplate).join("");
-    manualGadgetProducts.forEach(card => gadgetsGrid.appendChild(card));
+  if (emptyState) {
+    emptyState.hidden = Boolean(productGrid && productGrid.children.length);
   }
 
   document.querySelectorAll(".product-card").forEach(card => {
@@ -90,7 +88,7 @@ function openModal(id) {
     ? `<img src="${productData.image}" alt="${productData.name}" class="modal-product-photo">`
     : '<div class="product-figure"></div>';
 
-  const displayCategory = product ? categoryName(productData.category) : productData.category;
+  const displayCategory = "Produkt 3D";
   document.querySelector("#modal-category").textContent = `${displayCategory} · ${productData.label || "Kolekcja DrukStwór"}`;
   document.querySelector("#modal-name").textContent = productData.name;
   document.querySelector("#modal-description").textContent = productData.description;
@@ -100,7 +98,7 @@ function openModal(id) {
   document.querySelector("#modal-price").textContent = `${productData.price} zł`;
 
   const modalLink = document.querySelector("#modal-link");
-  modalLink.href = manualProduct && manualProduct.link ? manualProduct.link : sellLink;
+  modalLink.href = manualProduct ? manualProduct.link || sellLink : product.link || sellLink;
   modalLink.setAttribute("target", "_blank");
   modalLink.setAttribute("rel", "noopener noreferrer");
 
@@ -118,6 +116,35 @@ function openModal(id) {
 
 const menuToggle = document.querySelector(".menu-toggle");
 const nav = document.querySelector(".main-nav");
+const themeToggle = document.querySelector(".theme-toggle");
+
+function setTheme(theme, persist = false) {
+  const isDark = theme === "dark";
+  document.documentElement.dataset.theme = isDark ? "dark" : "light";
+  document.documentElement.style.colorScheme = isDark ? "dark" : "light";
+
+  if (themeToggle) {
+    themeToggle.setAttribute("aria-pressed", String(isDark));
+    themeToggle.setAttribute("aria-label", `Włącz ${isDark ? "jasny" : "ciemny"} motyw`);
+    themeToggle.querySelector(".theme-toggle-icon").textContent = isDark ? "☀" : "☾";
+    themeToggle.querySelector(".theme-toggle-label").textContent = isDark ? "Jasny motyw" : "Ciemny motyw";
+  }
+
+  if (persist) {
+    try {
+      localStorage.setItem("drukstwor-theme", isDark ? "dark" : "light");
+    } catch (error) {
+      console.warn("Nie udało się zapisać wybranego motywu.", error);
+    }
+  }
+}
+
+if (themeToggle) {
+  setTheme(document.documentElement.dataset.theme || "light");
+  themeToggle.addEventListener("click", () => {
+    setTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark", true);
+  });
+}
 
 if (menuToggle && nav) {
   menuToggle.addEventListener("click", () => {
@@ -149,5 +176,10 @@ if (modal) {
 window.addEventListener("scroll", () => {
   document.body.classList.toggle("header-scrolled", window.scrollY > 20);
 });
+
+const footerYear = document.querySelector("#footer-year");
+if (footerYear) {
+  footerYear.textContent = String(new Date().getFullYear());
+}
 
 renderProducts();

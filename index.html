@@ -1,28 +1,43 @@
 <!doctype html>
-<html lang="pl">
+<html lang="pl" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="DrukStwór.pl — wydruki 3D, halloweenowe dekoracje i gadżety z charakterem.">
-  <title>DrukStwór.pl — Wydruki 3D z pasją</title>
-  <link rel="icon" type="image/png" href="logo-drukstwór.png">
+  <meta name="description" content="DrukStwór.pl — praktyczne gadżety, dekoracje i oryginalne przedmioty tworzone w technologii druku 3D.">
+  <title>DrukStwór.pl — Sklep z wydrukami 3D</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <script>
+    try {
+      const savedTheme = localStorage.getItem("drukstwor-theme");
+      if (savedTheme === "light" || savedTheme === "dark") {
+        document.documentElement.dataset.theme = savedTheme;
+      }
+    } catch (error) {
+      console.warn("Nie udało się odczytać zapisanego motywu.", error);
+    }
+  </script>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header class="site-header">
     <a class="brand" href="#top" aria-label="DrukStwór.pl strony głównej">
-      <img src="logo-drukstwór.png" alt="Logo DrukStwór.pl" class="brand-logo">
+      <span class="brand-mark" aria-hidden="true">◇</span>
+      <span class="brand-name">DrukStwór<span>.pl</span></span>
     </a>
 
     <nav class="main-nav" aria-label="Nawigacja główna">
-      <a href="#halloween">Halloween</a>
-      <a href="#gadgets">Gadżety</a>
+      <a href="#produkty">Produkty</a>
       <a href="#druk-na-zamowienie">Druk na zamówienie</a>
       <a href="#kontakt">Kontakt</a>
     </nav>
+
+    <button class="theme-toggle" type="button" aria-label="Włącz ciemny motyw" aria-pressed="false">
+      <span class="theme-toggle-icon" aria-hidden="true">☾</span>
+      <span class="theme-toggle-label">Ciemny motyw</span>
+    </button>
 
     <button class="menu-toggle" aria-label="Otwórz menu" aria-expanded="false">
       <span></span>
@@ -34,42 +49,46 @@
   <main id="top">
     <section class="hero" aria-label="Sekcja główna">
       <div class="hero-content">
-        <h1 class="hero-title">HALLOWEEN</h1>
-        <h2 class="hero-subtitle">W 3D 🎃</h2>
-        <p class="hero-copy">WYJĄTKOWE DEKORACJE I GADŻETY<br>DRUKOWANE W 3D</p>
+        <p class="eyebrow">Sklep z wydrukami 3D</p>
+        <h1 class="hero-title">DrukStwór<span>.pl</span></h1>
+        <h2 class="hero-subtitle">Pomysły, które<br>nabierają kształtu.</h2>
+        <p class="hero-copy">ORYGINALNE GADŻETY, DEKORACJE I PRAKTYCZNE<br>PRZEDMIOTY DRUKOWANE W 3D</p>
         <div class="hero-actions">
-          <a class="button hero-cta" href="#halloween">ODKRYJ KOLEKCJĘ <span>→</span></a>
-          <a class="button hero-order-cta" href="https://forms.gle/GCDQkZTH56Ah7Sb5A" target="_blank" rel="noopener noreferrer">WŁASNY PROJEKT? WYŚLIJ MODEL <span>→</span></a>
+          <a class="button hero-cta" href="#produkty">ZOBACZ PRODUKTY <span>→</span></a>
+          <a class="button hero-order-cta" href="#druk-na-zamowienie">ZAMÓW WŁASNY WYDRUK <span>→</span></a>
         </div>
         <div class="hero-features" aria-label="Najważniejsze cechy">
-          <div><span class="feature-icon" aria-hidden="true">✦</span><span>Unikalne projekty</span></div>
-          <div><span class="feature-icon" aria-hidden="true">↗</span><span>Szybka wysyłka</span></div>
-          <div><span class="feature-icon" aria-hidden="true">♡</span><span>Dla pasjonatów</span></div>
+          <div><span class="feature-icon" aria-hidden="true">✦</span><span>Druk 3D na miejscu</span></div>
+          <div><span class="feature-icon" aria-hidden="true">↗</span><span>Zakup przez Allegro lub OLX</span></div>
+          <div><span class="feature-icon" aria-hidden="true">♡</span><span>Projekty na zamówienie</span></div>
         </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-visual-glow"></div>
+        <div class="hero-cube">
+          <span class="hero-cube-top"></span>
+          <span class="hero-cube-left"></span>
+          <span class="hero-cube-right"></span>
+        </div>
+        <div class="hero-visual-label">POMYSŁ <span>·</span> PROJEKT <span>·</span> WYDRUK</div>
       </div>
     </section>
 
-    <section class="section" id="halloween">
+    <section class="section products-section" id="produkty">
       <div class="section-header">
         <div>
-          <p class="eyebrow">Halloween</p>
-          <h2 class="section-title">Halloween <span>w 3D</span></h2>
+          <p class="eyebrow">Poznaj naszą ofertę</p>
+          <h2 class="section-title">Produkty <span>3D</span></h2>
         </div>
-        <p class="section-subtitle">Dekoracje, figurki i gadżety drukowane z pasją.</p>
+        <p class="section-subtitle">Gadżety, dekoracje i praktyczne przedmioty tworzone z dbałością o każdy detal.</p>
       </div>
-      <div class="product-grid" id="halloween-grid"><!-- PRODUCTS_HALLOWEEN_END -->
+      <div class="product-grid" id="products-grid"><!-- PRODUCTS_END -->
       </div>
-    </section>
-
-    <section class="section" id="gadgets">
-      <div class="section-header">
-        <div>
-          <p class="eyebrow">Gadżety</p>
-          <h2 class="section-title">Gadżety <span>3D</span></h2>
-        </div>
-        <p class="section-subtitle">Słodko-mroczne dodatki i małe dzieła z druku 3D, które sprawiają, że wnętrze ma charakter.</p>
-      </div>
-      <div class="product-grid" id="gadgets-grid"><!-- PRODUCTS_GADGETS_END -->
+      <div class="catalog-empty" id="products-empty">
+        <span class="catalog-empty-icon" aria-hidden="true">◇</span>
+        <h3>Oferta w przygotowaniu</h3>
+        <p>Wkrótce pojawią się tu nasze produkty. Szukasz konkretnego wydruku? Napisz do nas lub zamów własny projekt.</p>
+        <a class="button" href="#druk-na-zamowienie">ZAMÓW WYDRUK 3D <span>→</span></a>
       </div>
     </section>
 
@@ -156,7 +175,7 @@
           </div>
           <div class="mini-card accent">
             <span class="mini-label">Oferta</span>
-            <strong>Druk 3D z charakterem</strong>
+            <strong>Gadżety i wydruki 3D</strong>
           </div>
         </aside>
       </div>
@@ -165,20 +184,20 @@
 
   <footer class="site-footer">
     <div class="footer-brand">
-      <img src="logo-drukstwór.png" alt="Logo DrukStwór.pl" class="footer-logo">
+      <span class="brand-mark" aria-hidden="true">◇</span>
+      <span class="footer-brand-name">DrukStwór.pl</span>
     </div>
 
     <p class="footer-copy">DrukStwór.pl<br>Wydruki 3D z pasją</p>
 
     <div class="footer-links">
-      <a href="#halloween">Halloween</a>
-      <a href="#gadgets">Gadżety</a>
+      <a href="#produkty">Produkty</a>
       <a href="#druk-na-zamowienie">Druk na zamówienie</a>
       <a href="#kontakt">Kontakt</a>
       <a href="https://allegro.pl" target="_blank" rel="noopener noreferrer">Allegro</a>
     </div>
 
-    <div class="footer-meta">© 2024 DrukStwór.pl</div>
+    <div class="footer-meta">© <span id="footer-year">2026</span> DrukStwór.pl</div>
   </footer>
 
   <dialog class="product-modal" id="product-modal">

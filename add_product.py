@@ -71,6 +71,7 @@ def find_git() -> str:
 
 def card_markup(data: dict[str, str]) -> str:
     values = {key: html.escape(value, quote=True) for key, value in data.items()}
+    values.setdefault("category", "Produkt 3D")
     values.setdefault("olx_link", "")
     badge = f'<span class="product-badge">{values["label"]}</span>' if values["label"] else ""
     olx_link = (
@@ -162,9 +163,6 @@ def add_product() -> None:
     name = ask("Nazwa produktu: ")
     description = ask("Opis produktu: ")
     price = ask("Cena (np. 89,99): ")
-    category = ask("Sekcja (halloween/gadzety): ").lower()
-    if category not in {"halloween", "gadzety"}:
-        raise SystemExit("Sekcja musi mieć wartość: halloween albo gadzety.")
     label = ask("Etykieta (opcjonalnie): ", required=False)
     allegro_link = ask("Link do oferty Allegro: ")
     if not valid_url(allegro_link):
@@ -181,10 +179,9 @@ def add_product() -> None:
         raise SystemExit(f"Nie znaleziono pliku zdjęcia: {source_image}")
 
     content = HTML_FILE.read_text(encoding="utf-8")
-    section_name = "HALLOWEEN" if category == "halloween" else "GADGETS"
-    marker = f"<!-- PRODUCTS_{section_name}_END -->"
+    marker = "<!-- PRODUCTS_END -->"
     if marker not in content:
-        raise SystemExit(f"Nie znaleziono znacznika sekcji w {HTML_FILE.name}.")
+        raise SystemExit(f"Nie znaleziono znacznika katalogu produktów w {HTML_FILE.name}.")
 
     IMAGE_DIR.mkdir(exist_ok=True)
     filename = safe_filename(source_image)
@@ -198,7 +195,6 @@ def add_product() -> None:
         "name": name,
         "description": description,
         "price": price,
-        "category": "Halloween" if category == "halloween" else "Gadżety",
         "label": label,
         "image": f"images/{filename}",
         "link": allegro_link,
